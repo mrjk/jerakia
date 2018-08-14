@@ -4,6 +4,17 @@ require 'jerakia'
 class Jerakia
   class CLI < Thor
     module Secret
+      def self.included(thor)
+        thor.class_eval do
+          info = Secret.provider.loaded? ? "" : "(No encryption provider configured!)"
+          desc 'secret [SUBCOMMAND] <options>', "Manage encrypted secrets #{info}"
+          shared_options :config, :log_level, :verbose, :debug, :trace
+
+          subcommand 'secret', Secret
+
+        end
+      end
+
       class Secret < Thor
         
         Jerakia.new
@@ -43,14 +54,6 @@ class Jerakia
             end
             puts encrypted
           end
-        end
-      end
-
-      def self.included(thor)
-        thor.class_eval do
-          info = Secret.provider.loaded? ? "" : "(No encryption provider configured!)"
-          desc 'secret [SUBCOMMAND] <options>', "Manage encrypted secrets #{info}"
-          subcommand 'secret', Secret
         end
       end
     end

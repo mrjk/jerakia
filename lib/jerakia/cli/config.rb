@@ -4,10 +4,8 @@ class Jerakia
       def self.included(thor)
         thor.class_eval do
           desc 'config <options>', 'Print the runtime configuration options'
-          option :config,
-                 aliases: :c,
-                 type: :string,
-                 desc: 'Configuration file'
+          shared_options :config, :log_level, :verbose, :debug, :trace
+
           def config
             require 'yaml'
             jerakia = Jerakia.new(:config => options[:config])

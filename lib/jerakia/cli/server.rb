@@ -4,6 +4,8 @@ class Jerakia
       def self.included(thor)
         thor.class_eval do
           desc 'server <options>', 'Start the Jerakia REST server'
+          shared_options :config, :log_level, :verbose, :debug, :trace
+
           option :port,
                  aliases: :p,
                  type: :string,
@@ -19,22 +21,6 @@ class Jerakia
                  type: :string,
                  desc: 'Specify token TTL (default 300)'
 
-          option :config,
-                 aliases: :c,
-                 type: :string,
-                 desc: 'Configuration file'
-          option :log_level,
-                 aliases: :l,
-                 type: :string,
-                 desc: 'Log level'
-          option :verbose,
-                 aliases: :v,
-                 type: :boolean,
-                 desc: 'Log to STDOUT in verbose mode'
-          option :debug,
-                 aliases: :D,
-                 type: :boolean,
-                 desc: 'Log to STDOUT in debug mode'
           def server
             case true
             when options[:verbose]

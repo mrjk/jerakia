@@ -4,10 +4,8 @@ class Jerakia
       def self.included(thor)
         thor.class_eval do
           desc 'lookup [KEY]', 'Lookup [KEY] with Jerakia'
-          option :config,
-                 aliases: :c,
-                 type: :string,
-                 desc: 'Configuration file'
+          shared_options :config, :log_level, :verbose, :debug, :trace
+
           option :policy,
                  aliases: :p,
                  type: :string,
@@ -36,21 +34,6 @@ class Jerakia
                  type: :string,
                  default: 'array',
                  desc: 'Merge type'
-          option :log_level,
-                 aliases: :l,
-                 type: :string,
-                 desc: 'Log level'
-          option :verbose,
-                 aliases: :v,
-                 type: :boolean,
-                 desc: 'Print verbose information'
-          option :debug,
-                 aliases: :D,
-                 type: :boolean,
-                 desc: 'Debug information to console, implies --log-level debug'
-          option :trace,
-                 type: :boolean,
-                 desc: 'Output stacktrace to stdout'
           option :metadata,
                  aliases: :d,
                  type: :hash,

@@ -4,6 +4,8 @@ class Jerakia
       def self.included(thor)
         thor.class_eval do
           desc 'token [SUBCOMMAND] <api id> <options>', 'Create, view and manage token access'
+          shared_options :config, :log_level, :verbose, :debug, :trace
+
           option :quiet,
                  aliases: :q,
                  type: :boolean,
