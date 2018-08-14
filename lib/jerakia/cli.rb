@@ -10,7 +10,6 @@ require 'jerakia/cli/config'
 
 class Jerakia
   class CLI < Thor
-    desc 'help', 'tata'
 
     # Add shared options class
     # Source: https://stackoverflow.com/questions/14346285/how-to-make-two-thor-tasks-share-options
